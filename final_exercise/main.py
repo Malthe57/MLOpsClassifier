@@ -1,20 +1,20 @@
 import argparse
 import sys
-from torch.utils.data import Dataset, DataLoader
-import torch
-import torch.nn as nn
+
 import click
 import numpy as np
-
+import torch
+import torch.nn as nn
 from data import mnist
 from model import MyAwesomeModel
+from torch.utils.data import DataLoader, Dataset
 
 
 # create trainLoader
 class tloader(Dataset):
     def __init__(self, train):
-        self.img_labels = train['labels']
-        self.img = train['images']
+        self.img_labels = train["labels"]
+        self.img = train["images"]
 
     def __len__(self):
         return len(self.img_labels)
@@ -24,21 +24,20 @@ class tloader(Dataset):
         label = self.img_labels[idx]
         return image, label
 
+
 @click.group()
 def cli():
     pass
 
 
 @click.command()
-@click.option("--lr", default=1e-3, help='learning rate to use for training')
+@click.option("--lr", default=1e-3, help="learning rate to use for training")
 def train(lr):
     print("Training day and night")
     print(lr)
 
     model = MyAwesomeModel()
     train_set, _ = mnist()
-
-
 
     trainloader = DataLoader(tloader(train_set), batch_size=64, shuffle=True)
 
@@ -63,7 +62,8 @@ def train(lr):
         else:
             print(f"Training loss: {running_loss / len(trainloader)}")
 
-    torch.save(model.state_dict(), 'trained_model.pt')
+    torch.save(model.state_dict(), "trained_model.pt")
+
 
 @click.command()
 @click.argument("model_checkpoint")
@@ -76,7 +76,7 @@ def evaluate(model_checkpoint):
     model.load_state_dict(state_dict)
     model.eval()
     _, test_set = mnist()
-    #Create test loader
+    # Create test loader
     testloader = DataLoader(tloader(test_set), batch_size=64, shuffle=True)
     running_acc = []
     for images, labels in testloader:
@@ -85,16 +85,12 @@ def evaluate(model_checkpoint):
         equals = top_class == labels.view(*top_class.shape)
         accuracy = torch.mean(equals.type(torch.FloatTensor))
         running_acc.append(accuracy.item())
-    print(f'Accuracy: {np.mean(running_acc) * 100}%')
+    print(f"Accuracy: {np.mean(running_acc) * 100}%")
+
+
 cli.add_command(train)
 cli.add_command(evaluate)
 
 
 if __name__ == "__main__":
     cli()
-
-
-    
-    
-    
-    

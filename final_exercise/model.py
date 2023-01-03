@@ -1,6 +1,7 @@
-from torch import nn
 import torch
 import torch.nn.functional as F
+from torch import nn
+
 
 class MyAwesomeModel(nn.Module):
     def __init__(self):
@@ -13,7 +14,7 @@ class MyAwesomeModel(nn.Module):
         self.fc3 = nn.Linear(64, 10)
 
     def forward(self, x):
-        #flatten data
+        # flatten data
         x = x.view(x.shape[0], -1).to(torch.float32)
         # Hidden layer with sigmoid activation
         x = F.relu(self.fc1(x))

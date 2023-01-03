@@ -1,21 +1,23 @@
 import argparse
 import sys
-from torch.utils.data import Dataset, DataLoader
-import torch
-import torch.nn as nn
+
 import click
 import numpy as np
+import torch
+import torch.nn as nn
+from torch.utils.data import DataLoader, Dataset
 
 test_img = torch.load("data/processed/test_images_norm.pt")
 test_label = torch.load("data/processed/test_labels.pt")
-test = {'images': test_img, 'labels': test_label}
+test = {"images": test_img, "labels": test_label}
 from model import MyAwesomeModel
+
 
 # create trainLoader
 class tloader(Dataset):
     def __init__(self, train):
-        self.img_labels = train['labels']
-        self.img = train['images']
+        self.img_labels = train["labels"]
+        self.img = train["images"]
 
     def __len__(self):
         return len(self.img_labels)
@@ -51,15 +53,10 @@ def evaluate(model_checkpoint):
         equals = top_class == labels.view(*top_class.shape)
         accuracy = torch.mean(equals.type(torch.FloatTensor))
         running_acc.append(accuracy.item())
-    print(f'Accuracy: {np.mean(running_acc) * 100}%')
+    print(f"Accuracy: {np.mean(running_acc) * 100}%")
 
 
 cli.add_command(evaluate)
 
 if __name__ == "__main__":
     cli()
-
-
-
-
-

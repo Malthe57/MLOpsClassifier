@@ -1,10 +1,10 @@
 from setuptools import find_packages, setup
 
 setup(
-    name='src',
+    name="src",
     packages=find_packages(),
-    version='0.1.0',
-    description='A basic mnist classifier',
-    author='Malthe Andersen',
-    license='MIT',
+    version="0.1.0",
+    description="A basic mnist classifier",
+    author="Malthe Andersen",
+    license="MIT",
 )
