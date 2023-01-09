@@ -5,9 +5,9 @@ from src.models.model import MyAwesomeModel
 import pytest
 model = MyAwesomeModel()
 
-
-def test_model_output():
-    assert model(torch.ones(1,1,28,28)).shape==(1,10),"Output of model is not correct dimensions"
+@pytest.mark.parametrize("test_input,expected", [(torch.ones(1,1,28,28), (1,10)), (torch.zeros(64,1,28,28), (64,10))])
+def test_model_output(test_input,expected):
+    assert model(test_input).shape==expected,"Output of model is not correct dimensions"
 
 
 
