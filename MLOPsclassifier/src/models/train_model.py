@@ -7,6 +7,9 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, Dataset
 
+import wandb
+wandb.init(project="Mnist-classifier")
+
 # load training data
 train_img = torch.load("data/processed/train_images_norm.pt")
 train_label = torch.load("data/processed/train_labels.pt")
@@ -44,6 +47,8 @@ def train(lr):
     model = MyAwesomeModel()  # load model configuration
     train_set = trainz
 
+    wandb.watch(model, log_freq=100)
+
     trainloader = DataLoader(tloader(train_set), batch_size=64, shuffle=True)
 
     # define loss function (criterion) and optimizer. I just choose these two because they usually work well.
@@ -54,7 +59,8 @@ def train(lr):
     epochs = 10  # how many epochs to train, increase if you have a lot of time
     for e in range(epochs):
         running_loss = 0
-        for images, labels in trainloader:  # loop over data
+        for batch_idx, (images, labels) in enumerate(trainloader):  # loop over data
+            pic = wandb.Image(images.view(images.shape[0],1,28,28)) #log training input with wandb
             # standard training loop
             optimizer.zero_grad()
             output = model(images)
@@ -65,6 +71,9 @@ def train(lr):
 
             running_loss += loss.item()
             loss_list.append(loss.item())
+            if batch_idx % 10 == 0:
+                wandb.log({"loss": loss, "image": pic})
+
         else:
             print(f"Training loss: {running_loss / len(trainloader)}")
 

@@ -1,0 +1,42 @@
+{
+    "os": "Windows-10-10.0.19045-SP0",
+    "python": "3.10.8",
+    "heartbeatAt": "2023-01-06T13:55:07.082360",
+    "startedAt": "2023-01-06T13:55:04.111624",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "C:\\Users\\malth\\Documents\\MLOps\\s194257MLOps\\MLOPsclassifier\\src\\models\\train_model.py",
+    "codePath": "MLOPsclassifier\\src\\models\\train_model.py",
+    "git": {
+        "remote": "https://github.com/Malthe57/s194257MLOps.git",
+        "commit": "18fbdd21c12ae3afaf0369111a6db206d405c858"
+    },
+    "email": "s194257@student.dtu.dk",
+    "root": "C:/Users/malth/Documents/MLOps/s194257MLOps",
+    "host": "DESKTOP-AVK8U6T",
+    "username": "malth",
+    "executable": "C:\\Users\\malth\\anaconda3\\envs\\MLOps\\python.exe",
+    "cpu_count": 4,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 1600.0,
+        "min": 0.0,
+        "max": 1800.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 1600.0,
+            "min": 0.0,
+            "max": 1800.0
+        }
+    ],
+    "disk": {
+        "total": 237.15722274780273,
+        "used": 193.8028793334961
+    },
+    "memory": {
+        "total": 7.918998718261719
+    }
+}

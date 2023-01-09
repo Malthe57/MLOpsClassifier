@@ -40,6 +40,7 @@ def evaluate(model_checkpoint):
     print(model_checkpoint)
 
     model = MyAwesomeModel()
+    wandb.watch(model, log_freq=100)
     state_dict = torch.load(model_checkpoint)
     model.load_state_dict(state_dict)
     model.eval()
