@@ -40,7 +40,7 @@ def cli():
 
 @click.command()
 @click.option("--lr", default=1e-3, help="learning rate to use for training")
-def train(lr):
+def train(lr, epoch = 10):
     print("Training day and night")
     print(lr)
 
