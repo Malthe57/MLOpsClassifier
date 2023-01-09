@@ -3,7 +3,7 @@ import torch
 import os
 import pytest
 
-N_train = 25000
+N_train = 40000
 N_test = 5000
 #test length of training data and length of test data
 @pytest.mark.skipif(not os.path.exists(_PATH_DATA), reason="Data files not found")
