@@ -1,4 +1,6 @@
 [core]
-    remote = storage
+    remote = remote_storage
 ['remote "storage"']
     url = gdrive://14MYKBr2QgfKuIPdMvAFqYE3U786Pw077
+['remote "remote_storage"']
+    url = gs://yellow-plastic-bucket
